@@ -1,0 +1,45 @@
+---
+title: "Workshops"
+author: "Rick O. Gilmore"
+date: "`r Sys.time()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+
+This document facilitates the management of registrations at the workshops slated for Thursday, June 6, 2019.
+
+It depends on the `googlesheets` package, documented here: <https://cran.r-project.org/web/packages/googlesheets/vignettes/basic-usage.html>
+
+```{r}
+library(googlesheets)
+library(tidyverse)
+```
+
+## Download registrations from Google sheet
+
+```{r}
+ws_url <- "https://docs.google.com/forms/d/1tN5qri9YV6JjLO4nNoG6OmtTFl78NxBl941SlhKTqhI"
+ws_name <- "Symposium In Honor of Brian MacWhinney (Responses)"
+ws_key <- "1tN5qri9YV6JjLO4nNoG6OmtTFl78NxBl941SlhKTqhI/"
+
+mw <- googlesheets::gs_title(ws_name)
+```
+
+## Print workshop registrations
+
+```{r}
+workshops <- mw %>%
+  gs_read(ws = 'Workshop Registration')
+
+# drop some variables
+workshops %>%
+  select(Name, Institution, 'Check the workshops you are interested in attending') %>%
+  knitr::kable()
+```
+
+
