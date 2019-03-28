@@ -1,5 +1,5 @@
 ---
-title: "Workshops"
+title: "MacWhinney Symposium Workshops"
 author: "Rick O. Gilmore"
 date: "`r Sys.time()`"
 output: 
@@ -23,9 +23,9 @@ library(googlesheets)
 library(tidyverse)
 ```
 
-## Download registrations from Google sheet
-
 ```{r}
+# Download registrations from Google sheet
+
 ws_url <- "https://docs.google.com/forms/d/1tN5qri9YV6JjLO4nNoG6OmtTFl78NxBl941SlhKTqhI"
 ws_name <- "Symposium In Honor of Brian MacWhinney (Responses)"
 ws_key <- "1tN5qri9YV6JjLO4nNoG6OmtTFl78NxBl941SlhKTqhI/"
@@ -33,11 +33,14 @@ ws_key <- "1tN5qri9YV6JjLO4nNoG6OmtTFl78NxBl941SlhKTqhI/"
 mw <- googlesheets::gs_title(ws_name)
 
 workshops <- mw %>%
-  gs_read(ws = 'Workshop Registration') %>%
+  googlesheets::gs_read(ws = 'Workshop Registration') %>%
   rename(Attend = 'Check the workshops you are interested in attending')
+
+# symp <- mw %>%
+#   gs_read(ws = 'Symposium Registration')
 ```
 
-## AphasiaBank
+## AphasiaBank workshop
 
 ```{r}
 workshops %>%
@@ -47,7 +50,7 @@ workshops %>%
 ```
 
 
-## PhonBank
+## PhonBank workshop
 
 ```{r}
 workshops %>%
@@ -56,7 +59,7 @@ workshops %>%
   knitr::kable(.)
 ```
 
-## TalkBankDB
+## TalkBankDB workshop
 
 ```{r}
 workshops %>%
@@ -65,7 +68,7 @@ workshops %>%
   knitr::kable(.)
 ```
 
-## Databrary
+## Databrary workshop
 
 ```{r}
 workshops %>%
